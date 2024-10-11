@@ -10,7 +10,7 @@ let rec toBase b num =
     elif num = 0 then 0 // BC
     else (num%b) + (10 * (toBase b (num/b))) // IC
 let convert oldBase newBase num = 
-    toBase newBase (fromBase oldBase num)
+    fromBase oldBase num |> toBase newBase
 
 let rec convertAll (fromList: list<int>) (toList: list<int>) (numList: list<int>): list<int> = 
     if not (fromList.Length = toList.Length && toList.Length = numList.Length) then [-1] // Bad input
@@ -21,8 +21,8 @@ let rec convertAll (fromList: list<int>) (toList: list<int>) (numList: list<int>
 [<EntryPoint>]
 let main argv =
     let fromList = [2; 3; 10]
-    let toList = [10; 10; 3]
-    let numList = [00101; 00101; 10] // outputs 5; 10; 101 
+    let toList =   [10; 10; 3]
+    let numList =  [00101; 00101; 10] // outputs 5; 10; 101 
     let result = convertAll fromList toList numList
     printfn $"{result}"
     0
